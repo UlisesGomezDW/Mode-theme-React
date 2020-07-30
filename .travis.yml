@@ -1,20 +1,19 @@
-language: node.js
+language: node_js
+node_js:
+  - "stable"
 cache:
   directories:
-    - ~!@/.npm
-node_js:
-  - '9'
+    - node_modules
+script:
+  - npm run build
 git:
   depth: 3
-script: 
-  - npm run build
 deploy:
   provider: pages
   skip-cleanup: true
   keep-history: true
   github-token: $GITHUB_TOKEN
-  local-dir: public/
-  target-branch: master
+  project: ./build/
   commit_message: "Deploy release ${TRAVIS_TAG}"
-  on:
-    branch: master             
+on:
+  branch: master
